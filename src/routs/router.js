@@ -27,6 +27,8 @@ router.patch('/record/update/:id',async(req, res)=>{
         res.status(500).send(err);
     }
 })
+
+//get data
 router.get('/records',async(req, res)=>{
     try{
         const showrecords =await Person.find({});
@@ -35,6 +37,7 @@ router.get('/records',async(req, res)=>{
         res.staus(400).send(err);
     }
 })
+//delete data
 router.delete('/record/delete/:id',async(req, res)=>{
     try{
         const deletrecord = await Person.findByIdAndUpdate({_id:req.params.id},{isDeleted:true},{
@@ -46,18 +49,23 @@ router.delete('/record/delete/:id',async(req, res)=>{
     }
  
 })
-// router.fetch('/record/delete/fetch/:id',async(req, res)=>{
-//     try{
-//         const fetchrecord = await Person.findByIdAndUpdate({_id:req.params.id},{isDeleted:false},{
-//             new:true
-//         });
-//         res.send(deletrecord);
-//     }catch(err){
-//         res.status(500).send(err);
-//     }
+router.patch('/record/restore/:id',async(req, res)=>{
+    try{
+        const fetchrecord = await Person.findByIdAndUpdate({_id:req.params.id},{isDeleted:false},{
+            new:true
+        });
+        res.send(fetchrecord);
+    }catch(err){
+        res.status(500).send(err);
+    }
  
-// })
+})
 
+router.get('/fetch',async(req, res)=>{
+       
+        res.render(index.html);
+   
+})
 
 
 
