@@ -61,12 +61,6 @@ router.patch('/record/restore/:id',async(req, res)=>{
  
 })
 
-router.get('/fetch',async(req, res)=>{
-       
-        res.render(index.html);
-   
-})
-
 
 
 
