@@ -32,6 +32,7 @@ router.patch('/record/update/:id',async(req, res)=>{
 router.get('/records',async(req, res)=>{
     try{
         const showrecords =await Person.find({});
+        console.log(showrecords);
         res.status(201).send(showrecords);
     }catch(err){
         res.staus(400).send(err);
