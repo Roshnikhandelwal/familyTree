@@ -6,6 +6,7 @@ const path = require("path");
 const port= process.env.port||4000;
 require('./src/db/connection')
 const Person = require('./src/model/person')
+const Relation = require('./src/model/relation')
 const router =require('./src/routs/router')
 const PersonData= Person.find({})
 

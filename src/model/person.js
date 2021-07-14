@@ -40,10 +40,14 @@ const Schema= new mongoose.Schema({
         timestamps:true
     },
     last_update:{
-        type:Date,
-        
+        type:Date,  
       
-    }
+    },
+    relations:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Relation",
+        required:"commment is required"
+    }]
 
 })
 const Person=new mongoose.model("Person",Schema)

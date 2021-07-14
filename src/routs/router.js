@@ -1,6 +1,7 @@
 const router = require('express').Router();
 require('../db/connection')
 const Person = require('../model/person')
+const Relation = require('../model/relation')
 
 //create person
 router.post('/',async(req, res)=>{
@@ -62,7 +63,33 @@ router.patch('/record/restore/:id',async(req, res)=>{
  
 })
 
+//crate a relation 
+router.post("/:personId/relation",async(req,res)=>{
+    //find person
+    const person =  await Person.findOne({_id: req.params.personId});
 
+    //create relation
+    const relation = new Relation();
+    relation.relationtype=req.body.relationtype;
+    relation.person=person._id;
+    await relation.save();
 
+    //assosiate person with relation
+    person.relations.push(relation._id);
+    await person.save();
+
+    res.send(relation);
+});
+
+router.get("/relation",async(req,res)=>{
+    try{
+        const emp = await Relation.find({person:req.person._id})
+        res.json(emp);
+    }catch(err){
+        throw err
+    }
+
+});
+ 
 
 module.exports=router;
